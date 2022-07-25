@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+    parameters { 
+        string(name: 'build_number', defaultValue: '', description: '')
+        string(name: 'job_name', defaultValue: '', description: '')
+    }
+    
+    stages {
+        stage('pull artifact') {
+            steps {
+                copyArtifacts filter: '**/*.jar, **/target/surefire-reports/TEST-*.xml', fingerprintArtifacts: true, projectName: "${params.job_name}", selector: specific("${params.build_number}")
+                }
+            }
+        
+        
+        stage('build') {
+            steps {
+                sh "java -jar target/devops-exercise-0.0.1-SNAPSHOT.jar"
+            }
+        }
+    }
+}
