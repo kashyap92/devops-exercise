@@ -1,0 +1,5 @@
+#!groovy
+
+@Library('maven-build-library') _
+
+mavenPipeline(branch: 'master', url: 'https://github.com/kashyap92/devops-exercise.git')
