@@ -11,4 +11,11 @@
 1. Create 2 pipeline jobs; upstream jobs can be any name but downstream job should be 'devops-exercise-downstream-job'
 2. For the upstream job, use 'Jenkinsfile-upstream'.
 3. For the 'devops-exercise-downstream-job' job use 'Jenkinsfile-downstream'.
-4. For shared library, use 'Jenkinsfile-sharedlib' job, the shared libraries are located in a separate repo(standard/recommended configuration) in https://github.com/kashyap92/jenkins-shared-library.git
+4. For shared library, use 'Jenkinsfile-sharedlib' job, the shared libraries are located in a separate repo(standard/recommended configuration) in https://github.com/kashyap92/jenkins-shared-library.git 
+``` groovy
+#!groovy
+
+@Library('maven-build-library') _
+
+mavenPipeline(branch: 'master', url: 'https://github.com/kashyap92/devops-exercise.git')
+```
